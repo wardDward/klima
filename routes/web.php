@@ -4,9 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AuthController::class, 'loginView'])->name('login');

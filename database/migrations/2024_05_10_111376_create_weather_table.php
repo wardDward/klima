@@ -13,20 +13,11 @@ return new class extends Migration
     {
         Schema::create('weather', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('celsius');
             $table->string('weather_type');
             $table->string('humidity');
             $table->string('wind_speed');
-            $table->timestamps();
-        });
-
-        Schema::create('forecast', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('weather_id')->constrained('weather')->onDelete('cascade');
-            $table->string('morning');
-            $table->string('afternoon');
-            $table->string('evening');
-            $table->string('night');
             $table->timestamps();
         });
     }

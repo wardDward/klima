@@ -17,8 +17,9 @@
                 <div class="flex flex-wrap w-full ">
                     <div
                         class="w-full md:w-[48%] bg-mainColor my-2 mx-0 md:mx-1 flex flex-col px-6 py-5 rounded-lg justify-evenly">
-                        <div>
-                            <h1 class="text-2xl text-white">Weather</h1>
+                        <div class="flex items-center">
+                            <img src="{{asset('assets/cl.png')}}" alt="" class="h-[50px] w-[50px]">
+                            <h1 class="text-2xl text-white">Temperature</h1>
                         </div>
                     @if ($todayWeather)
 
@@ -35,75 +36,54 @@
                             
                             </span>
                         </div>
-                    <div class="mt-7">
-                        <h1 class="text-3xl font-bold text-white">{{$todayWeather->celsius}}&deg;C</h1>
-                        <p class="capitalize text-white text-sm font-[100]">{{$todayWeather->weather_type}}</p>
+                    <div class="mt-7  text-center">
+                        <h1 class="text-6xl font-bold text-white">{{$todayWeather->celsius}}&deg;C</h1>
+                        <p class="capitalize text-white text-sm mt-65 font-[100]">{{$todayWeather->weather_type}}</p>
                     </div>
-                    <ul class="mt-[20px]">
-                        <li class="text-white text-sm font-[300]">Humidity: {{$todayWeather->humidity}}</li>
-                        <li class="text-white text-sm font-[300]">Wind Speed:{{$todayWeather->wind_speed}}</li>
-                    </ul>
+              
                     @else
                     <p class="text-2xl text-center text-white font-bold">No weather data available for Today.</p>
                 @endif
                     </div>
                     <div class="w-full md:w-[48%] bg-mainColor my-2 mx-0 md:mx-1 rounded-lg px-6 py-7">
-                            <div>
-                                <h1 class="text-2xl text-white">Air Quality</h1>
+                        <div class="flex items-center">
+                            <img src="{{asset('assets/hm.png')}}" alt="" class="h-[50px] w-[50px]">
+                                <h1 class="text-2xl text-white">Humidity</h1>
                             </div>
                           @if ($todayWeather)
                             <div class="flex flex-col justify-center items-center h-full">
-                                <p class="text-7xl text-white font-extrabold">{{$todayWeather->celsius}}</p>
-                                <p class="text-white text-sm font-[100] tracking-widest">AQI</p>
+                                <p class="text-7xl text-white font-extrabold">{{$todayWeather->humidity}}</p>
                             </div>
                           @else
-                          <p class="text-2xl text-center text-white font-bold">No Air Quality data available for Today.</p>                          @endif
+                          <p class="text-2xl text-center text-white font-bold">No Humidity data available for Today.</p>                          @endif
                     </div>
                     <div class="w-full md:w-[97%] bg-mainColor my-2 mx-0 md:mx-1 rounded-lg py-5 px-4">
-                        <div>
-                            <h1 class="text-2xl text-white">Weather Summary</h1>
+                        <div class="flex items-center">
+                            <img src="{{asset('assets/WR.png')}}" alt="" class="h-[50px] w-[50px]">
+                            <h1 class="text-2xl text-white">Weather Records</h1>
                         </div>
                         <div class="flex flex-col justify-center h-full py-5">
-                                <div class="flex items-center justify-evenly mb-7">
-                                    <p class="text-white text-lg w-[33%] text-center">Yesterday's High</p>
-                                    <div class="flex items-center justify-center w-[33%]">
-                                        <div class="h-[10px] w-[10px] bg-red-500 rounded-full mr-[10px]"></div>
-                                        <p class="text-lg text-white ">28&deg;C</p>
-                                    </div>
-                                    <p class="text-white text-lg w-[33%] text-center">Wind</p>
+                            @if ($todayWeather)
+                            <div class="flex items-center justify-evenly mb-5">
+                                <p class="text-white text-lg w-[33%] text-center font-bold">TEMPERATURE</p>
+                                <div class="flex items-center justify-center w-[33%]">
+                                    <p class="text-lg text-white  font-bold ">HUMIDITY</p>
                                 </div>
-
-                                <div class="flex items-center justify-evenly mb-7">
-                                    <p class="text-white text-lg w-[33%] text-center">Yesterday's Low</p>
-                                    <div class="flex items-center justify-center w-[33%]">
-                                        <div class="h-[10px] w-[10px] rounded-full mr-[10px]" style="background-color: #80B362;"></div>
-                                        <p class="text-lg text-white ">28&deg;C</p>
-                                    </div>
-                                    <p class="text-white text-lg w-[33%] text-center">Sunrise: 10:10AM</p>
+                                <p class="text-white text-lg w-[33%] text-center  font-bold">TIME</p>
+                            </div>
+                            <div class="flex items-center justify-evenly mb-7">
+                                <p class="text-white text-lg w-[33%] text-center">{{$todayWeather->celsius}}</p>
+                                <div class="flex items-center justify-center w-[33%]">
+                                    <div class="h-[10px] w-[10px] rounded-full mr-[10px]" style="background: #6296B3;"></div>
+                                    <p class="text-lg text-white ">{{$todayWeather->humidity}}</p>
                                 </div>
-                       
-                                <div class="flex items-center justify-evenly mb-7">
-                                    <p class="text-white text-lg w-[33%] text-center">Air Quality</p>
-                                    <div class="flex items-center justify-center w-[33%]">
-                                        <div class="h-[10px] w-[10px] rounded-full mr-[10px]" style="background: #6296B3;"></div>
-                                        <p class="text-lg text-white ">3 mm</p>
-                                    </div>
-                                    <p class="text-white text-lg w-[33%] text-center">Sunrise: 10:10AM</p>
-                                </div>
-                       
-                                <div class="flex items-center justify-evenly mb-7">
-                                    <p class="text-white text-lg w-[33%] text-center">Humidity</p>
-                                    <div class="flex items-center justify-center w-[33%]">
-                                        <div class="h-[10px] w-[10px] rounded-full mr-[10px]" style="background-color: #80B362;"></div>
-                                        <p class="text-lg text-white ">20 Km/h</p>
-                                    </div>
-                                    <p class="text-white text-lg w-[33%] text-center"></p>
-                                </div>
-                       
+                                <p class="text-white text-lg w-[33%] text-center">{{ \Carbon\Carbon::parse($todayWeather->created_at)->timezone('Asia/Manila')->format('g:iA') }}</p>
+                            </div>
+                          @else
+                          <p class="text-2xl text-center text-white font-bold">No Weahter data available for Today.</p>                          @endif
                         </div>
                     </div>
                 </div>
-               
             </div>
         </div>
     </div>

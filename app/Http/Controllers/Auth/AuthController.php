@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+
 class AuthController extends Controller
 {
     public function loginView()
@@ -26,11 +28,10 @@ class AuthController extends Controller
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', 'string', 'confirmed'],
         ]);
 
-        // Create new user record
         $user = User::create([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -38,6 +39,8 @@ class AuthController extends Controller
             'email_verified_at' => now(),
             'password' => Hash::make($request->password),
         ]);
+
+        event(new Registered($user));
 
         Auth::login($user);
 
